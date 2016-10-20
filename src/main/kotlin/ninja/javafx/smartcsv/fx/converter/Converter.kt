@@ -85,11 +85,9 @@ class Converter(val name: String) {
 
     }
 
-    @Suppress("UNCHECKED_CAST")
     fun constraint(column : JsonObject, key : String, value: Any?) {
         if (value == null) return
-        val constraints = column["constraints"] as JsonObject? ?: JsonObject(HashMap<String, Any>())
-        column["constraints"] = constraints
+        val constraints = column.getOrPut("constraints") { JsonObject(mutableMapOf()) } as JsonObject
         constraints[key] = value
     }
 
