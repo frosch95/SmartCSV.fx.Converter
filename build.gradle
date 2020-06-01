@@ -1,8 +1,5 @@
-group 'ninja.javafx'
-version '1.1-SNAPSHOT'
-
 buildscript {
-    ext.kotlin_version = '1.0.4'
+    ext.kotlin_version = '1.3.72'
 
     repositories {
         mavenCentral()
@@ -12,14 +9,19 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'application'
-
-mainClassName = 'ninja.javafx.smartcsv.fx.converter.ConverterFX'
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "$kotlin_version" 
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
 
 repositories {
     mavenCentral()
     jcenter()
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
@@ -27,3 +29,7 @@ dependencies {
     compile 'com.beust:klaxon:0.24'
     compile 'no.tornado:tornadofx:1.5.6'
 }
+
+group 'ninja.javafx'
+version '1.1-SNAPSHOT'
+mainClassName = 'ninja.javafx.smartcsv.fx.converter.ConverterFX'
